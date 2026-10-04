@@ -1,0 +1,990 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Договор о дружбе</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Marck+Script&display=swap">
+<style>
+/* Layout: one candlelit stage, emerald envelope under a warm light; the contract opens as a stack of loose sheets */
+:root{
+  color-scheme:dark;
+  --bg:#060504;
+  --ink:#f3e6d3;
+  --muted:#a8917a;
+  --gold:#d9ad62;
+  --glow:255,150,72;
+  --tint:18,96,74;
+  --env-1:#13473a; --env-2:#0b2d24; --env-3:#041510;
+  --wax-1:#97142c; --wax-2:#520716; --wax-3:#260108; --wax-hi:#ec6a80;
+  --paper:#f0e3c8; --paper-2:#dbc5a0; --paper-ink:#2c1611; --paper-soft:rgba(44,22,17,.58);
+  --pen:#18213b;
+  --f-display:"Cormorant Garamond", "Cormorant", Georgia, "Times New Roman", serif;
+  --f-hand:"Marck Script", "Segoe Script", "Apple Chancery", cursive;
+}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-display);overflow-x:hidden}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
+
+.stage{position:relative;min-height:100%;display:grid;place-items:center;padding-inline:16px;padding-block:88px 48px;overflow:hidden;isolation:isolate}
+.light{position:absolute;inset:-10%;pointer-events:none;z-index:0}
+.l-warm{background:radial-gradient(circle at 50% 34%, rgba(var(--glow),.30), rgba(var(--glow),.08) 28%, transparent 52%);animation:flicker 6s infinite}
+.l-tint{background:radial-gradient(ellipse at 88% 92%, rgba(var(--tint),.55), transparent 48%),radial-gradient(ellipse at 6% 100%, rgba(var(--tint),.35), transparent 42%),radial-gradient(ellipse at 0% 0%, rgba(var(--tint),.22), transparent 40%)}
+.l-vig{background:radial-gradient(ellipse at 50% 45%, transparent 35%, rgba(0,0,0,.88) 100%)}
+#dust{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}
+@keyframes flicker{0%,100%{opacity:1;transform:scale(1)}18%{opacity:.86}22%{opacity:.97;transform:scale(1.015)}47%{opacity:.9}52%{opacity:1;transform:scale(.99)}78%{opacity:.84}83%{opacity:.98}}
+
+.top{position:absolute;top:0;left:0;right:0;z-index:5;padding:20px 20px 0}
+.brand{font-style:italic;font-size:20px;color:var(--gold);letter-spacing:.02em}
+.brand small{display:block;font-style:normal;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--muted)}
+
+.composition{position:relative;z-index:2;display:grid;justify-items:center;gap:30px;width:100%}
+.env-wrap{position:relative;width:min(86vw,500px);aspect-ratio:1.55;margin-top:calc(min(86vw,500px) * .56);perspective:1600px;transition:opacity 1s ease, transform 1.2s cubic-bezier(.3,.7,.2,1), filter 1s ease}
+.stage.reading .env-wrap{opacity:.2;transform:translateY(5%) scale(.93);filter:blur(3px)}
+.envelope{position:absolute;inset:0}
+
+.back{position:absolute;inset:0;border-radius:7px;background:linear-gradient(180deg,var(--env-3),var(--env-2));box-shadow:0 50px 90px -25px rgba(0,0,0,.9),0 0 160px -30px rgba(var(--glow),.35)}
+.back::after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(180deg,rgba(0,0,0,.55),transparent 60%)}
+
+.letter{position:absolute;left:5.5%;right:5.5%;top:5%;height:86%;z-index:2;border-radius:3px;padding:7% 8%;
+  background:radial-gradient(ellipse at 30% 0%,rgba(255,214,160,.6),transparent 60%),linear-gradient(180deg,var(--paper),var(--paper-2));
+  box-shadow:0 -8px 30px -10px rgba(var(--glow),.35)}
+.letter .l-title{margin:0 0 5%;font-size:clamp(9px,1.9vw,12px);font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--paper-ink);text-align:center}
+.letter .l-lines{height:50%;background:repeating-linear-gradient(180deg,transparent 0 11px,rgba(44,22,17,.24) 11px 12px)}
+.envelope.letter-peek .letter{transform:translateY(-30%);transition:transform .9s cubic-bezier(.3,1.28,.5,1)}
+.envelope.letter-out .letter{transform:translateY(-108%) rotate(-1.2deg);transition:transform 1.25s cubic-bezier(.45,0,.2,1)}
+.envelope .letter{transition:transform .9s cubic-bezier(.5,0,.3,1)}
+
+.pocket{position:absolute;inset:0;z-index:3;border-radius:7px;clip-path:polygon(0 0,50% 54%,100% 0,100% 100%,0 100%);
+  background:radial-gradient(ellipse at 50% 120%,rgba(var(--glow),.10),transparent 60%),linear-gradient(170deg,var(--env-1),var(--env-2) 58%,var(--env-3))}
+.pocket .fold{position:absolute;inset:0}
+.pocket .fold.l{clip-path:polygon(0 0,50% 54%,0 100%);background:linear-gradient(90deg,rgba(0,0,0,.05),rgba(0,0,0,.28))}
+.pocket .fold.r{clip-path:polygon(100% 0,50% 54%,100% 100%);background:linear-gradient(270deg,rgba(255,200,140,.05),rgba(0,0,0,.32))}
+.pocket .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.45),transparent 62%);transition:opacity 1.4s ease}
+.envelope.opened .pocket .shade{opacity:0}
+.pocket::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at var(--mx,50%) var(--my,70%),rgba(var(--glow),.26),transparent 38%);mix-blend-mode:screen}
+.addr{position:absolute;left:7%;bottom:10%;font-style:italic;font-weight:500;font-size:clamp(15px,3vw,21px);color:var(--gold);opacity:.85}
+.addr small{display:block;font-style:normal;font-size:clamp(9px,1.6vw,11px);letter-spacing:.3em;text-transform:uppercase;color:var(--muted);margin-top:2px}
+.post{position:absolute;right:7%;bottom:10%;font-size:clamp(9px,1.6vw,11px);letter-spacing:.3em;text-transform:uppercase;color:var(--muted);text-align:right;font-variant-numeric:tabular-nums}
+
+.flap{position:absolute;left:0;right:0;top:0;height:56%;z-index:4;transform-origin:50% 0;will-change:transform}
+.flap .face{position:absolute;inset:0;clip-path:polygon(0 0,100% 0,50% 100%)}
+.flap .inner{display:none}
+.flap.flipped{z-index:1}
+.flap.flipped .front{display:none}
+.flap.flipped .inner{display:block}
+.flap .front{background:radial-gradient(ellipse at 50% 0%,rgba(var(--glow),.20),transparent 70%),linear-gradient(180deg,var(--env-1),var(--env-2))}
+.flap .front::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.35),transparent 30%)}
+.flap .inner{background:radial-gradient(ellipse at 50% 100%,rgba(var(--glow),.16),transparent 70%),linear-gradient(0deg,#1f6350,#174d3e 55%,#123f33)}
+
+.seal{position:absolute;left:50%;top:56%;width:27%;aspect-ratio:1;transform:translate(-50%,-50%);z-index:6;border:0;background:none;padding:0;cursor:pointer;border-radius:50%;-webkit-tap-highlight-color:transparent}
+.seal::before{content:"";position:absolute;inset:-35%;border-radius:50%;background:radial-gradient(circle,rgba(var(--glow),.32),transparent 62%);animation:breathe 3.2s ease-in-out infinite;pointer-events:none;transition:opacity .6s}
+.seal.touched::before{opacity:0}
+.seal.broken{cursor:default}
+.seal-whole,.shards{position:absolute;inset:0}
+.shards{perspective:700px}
+.seal svg{width:100%;height:100%;display:block;overflow:visible}
+.seal-whole svg,.shard svg{filter:drop-shadow(0 6px 6px rgba(0,0,0,.6))}
+.seal-whole{transition:transform .5s cubic-bezier(.3,.7,.3,1)}
+.seal:not(.touched):hover .seal-whole{transform:scale(1.035)}
+.seal:not(.touched):active .seal-whole{transform:scale(.97);transition-duration:.12s}
+.seal.strain .seal-whole{animation:strain .55s ease-in-out}
+.seal .crk path{fill:none;stroke-linecap:round;stroke-linejoin:round}
+.seal .crk .cd{stroke:rgba(14,0,4,.92);stroke-width:3}
+.seal .crk .cl{stroke:var(--wax-hi);stroke-width:1;opacity:.55;transform:translate(1.4px,1.4px)}
+.seal-whole .crk path{stroke-dasharray:1;stroke-dashoffset:1}
+.seal.broken .seal-whole{visibility:hidden}
+.shard{position:absolute;inset:0;will-change:transform;transition:transform .35s cubic-bezier(.3,.7,.3,1)}
+.crumb{position:absolute;left:50%;top:50%;border-radius:40%;background:radial-gradient(circle at 35% 30%,var(--wax-hi),var(--wax-2) 70%)}
+.seal.stamp .seal-whole{animation:stamp .8s cubic-bezier(.2,.9,.3,1.15)}
+@keyframes arrive{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:scale(1)}}
+.envelope.settle{animation:settle .6s cubic-bezier(.3,1.4,.5,1)}
+@keyframes settle{0%{transform:translateY(0)}35%{transform:translateY(1.5%)}100%{transform:translateY(0)}}
+@keyframes breathe{0%,100%{opacity:.55;transform:scale(.95)}50%{opacity:1;transform:scale(1.05)}}
+@keyframes strain{0%{transform:scale(.97)}25%{transform:scale(.985) rotate(-.8deg)}50%{transform:scale(.975) rotate(.6deg)}75%{transform:scale(.99) rotate(-.3deg)}100%{transform:scale(1)}}
+@keyframes stamp{0%{transform:scale(1.5);opacity:0}60%{transform:scale(.93);opacity:1}100%{transform:scale(1)}}
+
+.hint{font-size:12px;letter-spacing:.38em;text-transform:uppercase;color:var(--muted);transition:opacity .6s;text-align:center}
+.hint b{color:var(--gold);font-weight:500}
+.stage.touched .hint{opacity:0}
+.stage.locked .env-wrap{filter:blur(6px) brightness(.55);transform:scale(.96)}
+.stage.locked .hint{opacity:0}
+.stage.locked .seal{pointer-events:none}
+.stage.intro .composition{visibility:hidden;opacity:0}
+.stage.wishes .seal{pointer-events:none}
+.stage.wishes .hint{opacity:0}
+.stage.wishes .seal::before{opacity:.25}
+.wishes-box{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);z-index:8;display:grid;justify-items:center;padding-inline:16px;pointer-events:none}
+.bubble{position:relative;grid-area:1/1;max-width:min(360px,100%);padding:14px 22px 15px;border-radius:22px 22px 22px 6px;
+  font-style:italic;font-weight:500;font-size:clamp(20px,1vw + 16px,25px);line-height:1.25;color:var(--ink);text-align:center;text-wrap:balance;
+  background:linear-gradient(180deg,rgba(29,99,80,.72),rgba(8,36,29,.82));border:1px solid rgba(217,173,98,.32);
+  box-shadow:0 18px 40px -14px rgba(0,0,0,.85),0 0 60px -12px rgba(var(--glow),.45);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.bubble::after{content:"";position:absolute;left:14px;bottom:-7px;width:14px;height:14px;background:rgba(8,36,29,.9);border-right:1px solid rgba(217,173,98,.32);border-bottom:1px solid rgba(217,173,98,.32);transform:rotate(45deg) skew(8deg,8deg);border-bottom-right-radius:4px}
+.bubble.typing{padding:16px 20px;display:flex;gap:6px}
+.bubble.typing i{width:8px;height:8px;border-radius:50%;background:var(--gold);opacity:.4;animation:dot 1s infinite ease-in-out}
+.bubble.typing i:nth-child(2){animation-delay:.15s}.bubble.typing i:nth-child(3){animation-delay:.3s}
+@keyframes dot{0%,60%,100%{transform:translateY(0);opacity:.35}30%{transform:translateY(-5px);opacity:1}}
+.gate{position:absolute;inset:0;z-index:10;display:grid;place-items:center;padding-inline:16px;transition:opacity .7s ease}
+.gate.gone{opacity:0;pointer-events:none}
+.gate-card{width:min(360px,100%);display:grid;gap:14px;justify-items:center;text-align:center;padding:30px 26px 26px;border-radius:14px;
+  background:linear-gradient(180deg,rgba(19,71,58,.55),rgba(4,21,16,.75));border:1px solid rgba(217,173,98,.28);
+  box-shadow:0 30px 80px -20px rgba(0,0,0,.9),0 0 120px -30px rgba(var(--glow),.45);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.gate-card.shake{animation:gshake .45s cubic-bezier(.36,.07,.19,.97)}
+@keyframes gshake{10%,90%{transform:translateX(-2px)}20%,80%{transform:translateX(4px)}30%,50%,70%{transform:translateX(-7px)}40%,60%{transform:translateX(7px)}}
+.gate-eyebrow{font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:var(--muted)}
+.gate-title{margin:0;font-style:italic;font-weight:500;font-size:28px;line-height:1.1;color:var(--gold)}
+.gate-form{display:grid;gap:10px;width:100%}
+.gate-form input{width:100%;padding:13px 16px;border-radius:999px;border:1px solid rgba(217,173,98,.35);background:rgba(0,0,0,.35);color:var(--ink);
+  font-family:var(--f-display);font-size:19px;text-align:center;letter-spacing:.06em;outline:none;transition:border-color .3s, box-shadow .3s}
+.gate-form input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(217,173,98,.15)}
+.gate-form button{border:0;cursor:pointer;padding:13px 20px;border-radius:999px;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:#f7e4e2;
+  background:radial-gradient(circle at 35% 25%,var(--wax-hi),var(--wax-1) 42%,var(--wax-2));box-shadow:inset 0 -3px 6px rgba(0,0,0,.35)}
+.gate-form button:hover{filter:brightness(1.1)}
+.gate-msg{min-height:1.3em;margin:0;font-style:italic;font-size:15px;color:#e59aa6}
+.gate-msg.love{color:var(--gold);font-size:17px}
+.gate-card{position:relative}
+.heart{position:absolute;left:50%;top:50%;width:var(--s);height:var(--s);pointer-events:none;color:var(--wax-hi);filter:drop-shadow(0 0 8px rgba(236,106,128,.7))}
+.heart svg{width:100%;height:100%;display:block}
+.big-heart{position:absolute;left:50%;top:50%;width:120px;height:120px;margin:-60px;pointer-events:none;color:var(--wax-1);filter:drop-shadow(0 0 24px rgba(236,106,128,.8))}
+
+/* ---------- reader: loose sheets on a desk ---------- */
+.reader{position:fixed;inset:0;z-index:20;display:grid;place-items:center;align-content:center;gap:18px;padding:20px 16px}
+.sheets{position:relative;width:var(--sw,560px);height:var(--sh,760px);transform-origin:0 0}
+.sheet{position:absolute;inset:0;display:flex;flex-direction:column;border-radius:3px;color:var(--paper-ink);
+  padding:clamp(20px,5vw,44px) clamp(20px,5.5vw,48px) clamp(16px,3.5vw,28px);
+  background:radial-gradient(ellipse at 15% 0%,rgba(255,214,158,.7),transparent 55%),radial-gradient(ellipse at 100% 100%,rgba(90,35,10,.26),transparent 55%),linear-gradient(180deg,var(--paper),var(--paper-2));
+  box-shadow:0 40px 100px -30px rgba(0,0,0,.95),0 0 150px -30px rgba(var(--glow),.4),inset 0 0 60px rgba(90,40,10,.22);
+  transition:transform .85s cubic-bezier(.3,.7,.2,1),opacity .7s ease,box-shadow .85s;will-change:transform}
+.sheet::before,.sheet::after{content:"";position:absolute;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(60,30,15,.16) 20%,rgba(60,30,15,.16) 80%,transparent);pointer-events:none}
+.sheet::before{top:33.3%}.sheet::after{top:66.6%}
+.sheet.below{box-shadow:0 20px 50px -25px rgba(0,0,0,.9)}
+.sheet.below .sheet-body,.sheet.below .sheet-head{opacity:.0}
+.sheets.veil .sheet-body,.sheets.veil .sheet-head{opacity:0!important;transition:none!important}
+.sheet.gone{opacity:0;pointer-events:none}
+.sheet.hide{visibility:hidden}
+.sheet-head{display:flex;justify-content:space-between;gap:12px;font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--paper-soft);padding-bottom:12px;margin-bottom:14px;border-bottom:1px solid rgba(44,22,17,.16);font-variant-numeric:tabular-nums;transition:opacity .4s}
+.sheet-body{flex:1;min-height:0;overflow-x:hidden;overflow-y:auto;scrollbar-width:thin;font-size:clamp(15.5px,.5vw + 14px,18px);line-height:1.42;transition:opacity .4s}
+.sheet-body > *{margin:0 0 .6em}
+.sheet-body h1{font-size:1.18em;font-weight:700;letter-spacing:.08em;text-transform:uppercase;text-align:center;line-height:1.25;text-wrap:balance;margin:.2em 0 .9em}
+.final > *{margin:0 0 .6em}
+.final > h2:first-child{margin-top:.2em}
+.sheet-body h2{font-size:.82em;font-weight:700;letter-spacing:.22em;text-transform:uppercase;margin:1.1em 0 .55em}
+.sheet-body p{text-align:justify;hyphens:auto}
+.sheet-body .n{font-weight:600;font-variant-numeric:tabular-nums;margin-right:.35em}
+.sheet-body .sub{padding-left:1.2em}
+.sheet-body .meta{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-style:italic;color:var(--paper-soft)}
+.blank{display:inline-block;min-width:7em;border-bottom:1px solid rgba(44,22,17,.45);height:1.05em;vertical-align:baseline}
+.party{display:grid;grid-template-columns:auto 1fr;gap:.3em .8em;align-items:end;margin:0 0 1em}
+.party .who{grid-column:1/-1;font-size:.82em;font-weight:700;letter-spacing:.22em;text-transform:uppercase}
+.party .k{color:var(--paper-soft);font-style:italic}
+.party .line{position:relative;border-bottom:1px solid rgba(44,22,17,.45);min-height:1.5em}
+.party .line .hand{position:absolute;left:.2em;bottom:.05em;font-family:var(--f-hand);font-size:1.12em;color:var(--pen);white-space:nowrap;clip-path:inset(0 100% 0 0)}
+.party .line .hand.on{clip-path:inset(0 0 0 0);transition:clip-path 1.1s steps(18,end)}
+.sig-svg{position:absolute;height:auto;overflow:visible;pointer-events:none}
+.sig-svg.s1{right:8%;bottom:-1.9em;width:min(140px,52%)}
+.sig-svg.s2{right:10%;bottom:-1.7em;width:min(150px,55%)}
+.sig-svg path{fill:none;stroke:var(--pen);stroke-width:9;stroke-linecap:round;stroke-linejoin:round}
+.confirm{font-style:italic}
+.sign-row{display:flex;justify-content:flex-end;padding-top:.4em}
+.btn{border:0;cursor:pointer;padding:13px 26px;border-radius:999px;font-size:12px;letter-spacing:.26em;text-transform:uppercase;color:#f1efe6;
+  background:radial-gradient(circle at 35% 25%,#3c9c7c,var(--env-1) 45%,var(--env-3));box-shadow:inset 0 -3px 6px rgba(0,0,0,.35),0 10px 22px -8px rgba(0,0,0,.6);transition:filter .3s,transform .3s}
+.btn:hover:not(:disabled){filter:brightness(1.12)}
+.btn:active:not(:disabled){transform:scale(.97)}
+.btn:disabled{cursor:default;background:transparent;color:var(--env-1);box-shadow:inset 0 0 0 1px rgba(19,71,58,.5)}
+.btn:focus-visible{outline-color:var(--paper-ink)}
+
+.nav{display:flex;align-items:center;justify-content:center;gap:14px;color:var(--ink);transition:opacity .5s}
+.nav.dim{opacity:0;pointer-events:none}
+.nav button{border:1px solid rgba(217,173,98,.3);background:rgba(255,255,255,.03);width:42px;height:42px;border-radius:50%;cursor:pointer;font-size:20px;line-height:1;color:var(--gold);display:grid;place-items:center}
+.nav button:disabled{opacity:.3;cursor:default}
+.nav .count{min-width:5.5em;text-align:center;font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);font-variant-numeric:tabular-nums}
+.nav .fold-btn{width:auto;padding:0 16px;border-radius:999px;font-size:11px;letter-spacing:.24em;text-transform:uppercase;margin-left:6px}
+
+.hug{position:fixed;inset:0;z-index:40;background:radial-gradient(ellipse at 50% 45%,rgba(40,14,10,.55),rgba(3,10,8,.92) 70%);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);cursor:pointer}
+.hug .fly{position:fixed;transform-origin:50% 50%}
+.hug .lean{transform-origin:50% 90%}
+.hug .fly svg{width:100%;height:auto;display:block;overflow:visible}
+.hug .fly path{fill:none;stroke:#f6e7cf;stroke-linecap:round;stroke-linejoin:round;stroke-width:10;filter:drop-shadow(0 0 6px rgba(255,180,110,.85))}
+.hug .heart-ring{position:fixed;overflow:visible;pointer-events:none}
+.hug .heart-ring path{fill:none;stroke:#f6e7cf;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 8px rgba(236,106,128,.9))}
+.hug .caption{position:fixed;left:0;right:0;text-align:center;padding-inline:16px;display:grid;gap:6px;opacity:0}
+.hug .caption b{font-style:italic;font-weight:500;font-size:clamp(26px,3vw + 14px,38px);color:var(--gold)}
+.hug .caption span{font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--muted)}
+.hug .spark{position:fixed;width:var(--s);height:var(--s);margin:calc(var(--s) / -2);color:var(--wax-hi);pointer-events:none;filter:drop-shadow(0 0 6px rgba(236,106,128,.8))}
+.hug .spark svg{width:100%;height:100%;display:block}
+@media (max-width:520px){.sheet-body p{text-align:left}}
+@media (prefers-reduced-motion: reduce){
+  .l-warm,.seal::before{animation:none}
+  .letter,.flap,.env-wrap,.sheet{transition-duration:.01s}
+}
+</style>
+<style>html,body{margin:0}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}img{max-width:100%}</style>
+</head>
+<body>
+<main class="stage intro wishes" id="stage">
+  <div class="light l-warm"></div>
+  <div class="light l-tint"></div>
+  <canvas id="dust" aria-hidden="true"></canvas>
+  <div class="light l-vig"></div>
+
+  <header class="top">
+    <div class="brand">Для Миланы<small>вскрыть при свечах</small></div>
+  </header>
+
+  <section class="composition">
+    <div class="env-wrap">
+      <div class="envelope" id="envelope">
+        <div class="back"></div>
+        <div class="letter" id="letter" aria-hidden="true">
+          <p class="l-title">Договор о дружбе</p>
+          <div class="l-lines"></div>
+        </div>
+        <div class="pocket">
+          <span class="fold l"></span><span class="fold r"></span><span class="shade"></span>
+          <span class="addr">Быстровой Милане<small>лично в руки</small></span>
+          <span class="post">от Д. А. Попова<br>в двух экз.</span>
+        </div>
+        <div class="flap" id="flap"><div class="face front"></div><div class="face inner"></div></div>
+        <button class="seal" id="seal" type="button" aria-label="Сломать сургучную печать">
+          <span class="seal-whole"></span>
+          <span class="shards"></span>
+        </button>
+      </div>
+    </div>
+    <p class="hint">Нажмите на <b>печать</b>, чтобы вскрыть</p>
+  </section>
+
+  <div class="wishes-box" id="wishes" aria-live="polite"></div>
+
+  <div class="gate gone" id="gate" hidden>
+    <div class="gate-card" id="gateCard">
+      <span class="gate-eyebrow">Чтобы вскрыть письмо, ответь</span>
+      <h1 class="gate-title">Что любит Даня?</h1>
+      <form class="gate-form" id="gateForm" autocomplete="off">
+        <input id="gate-word" type="text" placeholder="Твой ответ" aria-label="Ответ на вопрос: что любит Даня?" autocapitalize="off" spellcheck="false">
+        <button type="submit">Открыть</button>
+      </form>
+      <p class="gate-msg" id="gateMsg" role="status"></p>
+    </div>
+  </div>
+
+  <div class="reader" id="reader" hidden>
+    <div class="sheets" id="sheets" aria-live="polite"></div>
+    <nav class="nav" id="nav" aria-label="Листы договора">
+      <button type="button" id="prev" aria-label="Предыдущий лист">‹</button>
+      <span class="count" id="count">1 / 1</span>
+      <button type="button" id="next" aria-label="Следующий лист">›</button>
+      <button type="button" class="fold-btn" id="fold">В конверт</button>
+    </nav>
+  </div>
+</main>
+
+<template id="doc">
+  <h1>Договор о дружбе, взаимном уважении и верности</h1>
+  <div class="meta"><span>г. <span class="blank"></span></span><span>«<span class="blank" style="min-width:2em"></span>» <span class="blank" style="min-width:6em"></span> 20<span class="blank" style="min-width:1.6em"></span> г.</span></div>
+  <p>Попов Даниил Алексеевич, именуемый в дальнейшем «Сторона 1», с одной стороны, и Быстрова Милана Юрьевна, именуемая в дальнейшем «Сторона 2», с другой стороны, совместно именуемые «Стороны», заключили настоящий Договор о нижеследующем.</p>
+
+  <h2>1. Предмет договора</h2>
+  <p><span class="n">1.1.</span>Стороны добровольно принимают на себя обязательства по сохранению, укреплению и развитию дружеских отношений, основанных на взаимном доверии, уважении, искренности, поддержке и преданности.</p>
+  <p><span class="n">1.2.</span>Целью настоящего Договора является закрепление взаимных договорённостей Сторон о принципах общения, разрешении разногласий и сохранении дружбы независимо от изменения жизненных обстоятельств.</p>
+  <p><span class="n">1.3.</span>Стороны признают ценность сложившихся между ними отношений и выражают намерение прилагать добросовестные усилия для их сохранения.</p>
+
+  <h2>2. Права и обязанности сторон</h2>
+  <p><span class="n">2.1.</span>Стороны обязуются:</p>
+  <p class="sub"><span class="n">2.1.1.</span>Взаимно уважать друг друга, личные границы, чувства, убеждения и право каждого на собственное мнение.</p>
+  <p class="sub"><span class="n">2.1.2.</span>Соблюдать доверие, не допускать намеренного обмана, злоупотребления доверием и использования личной информации другой Стороны во вред ей.</p>
+  <p class="sub"><span class="n">2.1.3.</span>Оказывать поддержку в трудных жизненных ситуациях, по возможности предоставлять помощь, внимание и содействие.</p>
+  <p class="sub"><span class="n">2.1.4.</span>Соблюдать конфиденциальность в отношении личных разговоров, признаний, переписки и иных сведений, которыми Стороны поделились на условиях доверия, за исключением случаев, когда раскрытие необходимо для предотвращения серьёзного вреда или исполнения требований закона.</p>
+  <p class="sub"><span class="n">2.1.5.</span>Поддерживать открытое общение, своевременно обсуждать возникающие недопонимания и стремиться к их мирному разрешению.</p>
+  <p class="sub"><span class="n">2.1.6.</span>Быть честными друг с другом, выражать своё мнение уважительно и не использовать уязвимости другой Стороны для манипуляций, давления или унижения.</p>
+  <p class="sub"><span class="n">2.1.7.</span>Бережно относиться к дружбе, уделять внимание отношениям и находить время для общения с учётом занятости и личных обстоятельств каждой Стороны.</p>
+  <p><span class="n">2.2.</span>Стороны имеют право:</p>
+  <p class="sub"><span class="n">2.2.1.</span>Рассчитывать на искренность, уважительное отношение и добросовестность со стороны друг друга.</p>
+  <p class="sub"><span class="n">2.2.2.</span>Обращаться друг к другу за советом, эмоциональной поддержкой и помощью с учётом реальных возможностей другой Стороны.</p>
+  <p class="sub"><span class="n">2.2.3.</span>Выражать несогласие, иметь собственную точку зрения и принимать самостоятельные решения без необоснованного осуждения.</p>
+  <p class="sub"><span class="n">2.2.4.</span>На личное пространство, отдых, самостоятельность и общение с другими людьми без необоснованных претензий со стороны другой Стороны.</p>
+  <p class="sub"><span class="n">2.2.5.</span>Предлагать изменения настоящего Договора при условии взаимного согласия.</p>
+  <p><span class="n">2.3.</span>Сторонам надлежит воздерживаться от:</p>
+  <p class="sub"><span class="n">2.3.1.</span>Намеренного распространения личных сведений, способных причинить вред репутации или благополучию другой Стороны.</p>
+  <p class="sub"><span class="n">2.3.2.</span>Оскорблений, унижения, угроз, шантажа и иных форм намеренного психологического давления.</p>
+  <p class="sub"><span class="n">2.3.3.</span>Использования дружбы в качестве средства контроля, ограничения свободы или предъявления необоснованных требований.</p>
+  <p class="sub"><span class="n">2.3.4.</span>Намеренного игнорирования серьёзных проблем, если их обсуждение необходимо для сохранения взаимопонимания.</p>
+
+  <h2>3. Порядок разрешения разногласий</h2>
+  <p><span class="n">3.1.</span>Все разногласия, возникающие между Сторонами, подлежат разрешению преимущественно путём открытого, спокойного и добросовестного диалога.</p>
+  <p><span class="n">3.2.</span>Каждая Сторона обязуется стремиться понять позицию другой Стороны, выслушивать её аргументы и не допускать поспешных выводов без выяснения обстоятельств.</p>
+  <p><span class="n">3.3.</span>Ни одна из Сторон не признаётся виновной исключительно на основании того, кто первым начал разговор, принёс извинения или предпринял попытку примирения. Оценка конфликта осуществляется с учётом обстоятельств и действий обеих Сторон.</p>
+  <p><span class="n">3.4.</span>При возникновении обиды Стороны обязуются по возможности не затягивать конфликт намеренно и предпринимать разумные усилия для восстановления доверия.</p>
+  <p><span class="n">3.5.</span>В случае необходимости каждая Сторона вправе взять временную паузу для успокоения и обдумывания ситуации, предварительно по возможности уведомив об этом другую Сторону.</p>
+  <p><span class="n">3.6.</span>Примирение не исключает права Сторон обсуждать причины конфликта и договариваться о мерах, направленных на недопущение подобных ситуаций в будущем.</p>
+
+  <h2>4. Срок действия договора</h2>
+  <p><span class="n">4.1.</span>Настоящий Договор вступает в силу с момента его подписания обеими Сторонами.</p>
+  <p><span class="n">4.2.</span>Договор заключается на неопределённый срок и отражает намерение Сторон сохранять дружеские отношения на протяжении всей жизни.</p>
+  <p><span class="n">4.3.</span>Изменения и дополнения к настоящему Договору вносятся исключительно по взаимному согласию Сторон.</p>
+  <p><span class="n">4.4.</span>Настоящий Договор основан на добровольном волеизъявлении Сторон. Ни одно его положение не может толковаться как обязанность поддерживать отношения вопреки свободной воле, безопасности или личным границам любой из Сторон.</p>
+
+  <h2>5. Заключительные положения</h2>
+  <p><span class="n">5.1.</span>Подписывая настоящий Договор, Стороны подтверждают, что ознакомились с его содержанием, понимают смысл изложенных положений и добровольно принимают на себя предусмотренные им моральные обязательства.</p>
+  <p><span class="n">5.2.</span>Стороны признают, что основой прочной дружбы являются последовательные поступки, взаимное уважение, честность и готовность поддерживать друг друга.</p>
+  <p><span class="n">5.3.</span>Настоящий Договор составлен в двух экземплярах, по одному для каждой из Сторон. Оба экземпляра имеют одинаковое содержание.</p>
+  <p><span class="n">5.4.</span>Договор носит личный, добровольный и морально-этический характер и сам по себе не устанавливает юридически принудительных обязательств между Сторонами.</p>
+
+  <div class="final">
+  <h2>6. Реквизиты и подписи сторон</h2>
+  <div class="party">
+    <span class="who">Сторона 1</span>
+    <span class="k">Ф. И. О.</span><span>Попов Даниил Алексеевич</span>
+    <span class="k">Подпись</span><span class="line" data-slot="sig1"></span>
+    <span class="k">Дата</span><span class="line" data-slot="date1"></span>
+  </div>
+  <div class="party">
+    <span class="who">Сторона 2</span>
+    <span class="k">Ф. И. О.</span><span>Быстрова Милана Юрьевна</span>
+    <span class="k">Подпись</span><span class="line" data-slot="sig2"></span>
+    <span class="k">Дата</span><span class="line" data-slot="date2"></span>
+  </div>
+
+  <div class="sign-row"><button class="btn" type="button" data-sign>Подписать</button></div>
+  </div>
+</template>
+
+<script>
+const SIG1=["M39 334 Q12 361 10 367 Q9 373 10 396 Q10 418 14 428 Q19 437 28 446 Q37 455 42 456 Q48 458 60 458 Q73 457 78 454 Q84 451 94 441 Q104 431 120 409 Q137 387 138 382 Q140 378 146 372 Q152 367 154 364 Q156 361 169 358 Q182 354 222 355 Q261 356 298 356 Q334 355 338 356 Q341 357 347 356 Q353 355 386 356 Q418 358 426 359 Q435 360 436 361 Q437 362 442 361 Q448 360 450 357 Q451 354 475 334 Q499 315 526 291 Q552 267 555 266 Q558 266 560 262 Q561 257 566 250 L571 243","M198 229 Q175 240 157 240 Q139 240 129 242 Q119 243 92 243 Q65 243 62 241 Q60 239 60 237 Q59 235 60 228 Q62 222 78 211 Q93 200 118 188 Q143 175 174 162 Q204 150 236 139 Q267 128 288 122 Q308 116 312 116 Q315 116 316 114 Q318 113 366 98 Q414 83 439 76 Q464 70 522 52 Q579 35 594 29 Q610 23 615 20 Q620 17 623 14 L626 10","M68 406 Q72 398 80 390 Q89 382 102 376 Q116 369 128 365 Q139 361 146 360 Q153 360 154 361 L155 362","M68 406 Q69 408 74 408 Q78 408 106 393 Q134 378 137 378 L140 378","M120 621 Q122 609 127 602 Q132 594 145 580 Q158 565 174 550 Q191 534 221 512 Q251 489 302 458 Q353 426 361 420 Q369 414 373 413 Q377 412 385 404 Q393 396 394 392 Q395 388 401 377 Q407 366 408 362 L408 358","M120 621 Q120 633 122 636 Q125 640 137 640 Q149 640 162 636 Q174 631 196 616 Q217 601 230 590 Q244 578 267 554 Q290 530 306 510 Q322 491 347 458 Q372 424 374 418 L377 412","M160 359 Q162 350 191 307 Q220 264 248 219 Q276 174 290 153 Q305 132 310 127 Q314 122 314 119 L315 116","M186 354 Q189 349 233 328 Q277 306 280 306 Q282 306 287 302 Q292 298 292 294 Q293 290 338 196 L382 103","M251 382 Q251 379 256 370 Q260 362 260 359 L261 356","M264 355 Q268 343 276 328 Q283 313 284 309 L284 305","M280 373 L283 356","M280 373 Q280 382 282 384 Q283 386 294 386 Q305 385 316 378 Q327 372 333 367 Q339 362 340 360 L341 357","M287 355 Q292 340 300 328 Q309 317 322 304 Q336 290 346 283 Q357 276 358 272 L360 268","M292 297 Q299 296 326 282 Q353 269 358 268 Q363 268 374 262 Q386 256 391 254 Q396 253 400 250 Q403 246 458 222 Q514 197 570 176 Q627 154 680 136 Q734 119 750 112 Q765 106 769 106 Q773 105 774 104 Q775 102 782 99 Q790 96 826 76 L862 55","M352 355 Q361 344 369 338 Q377 332 392 318 Q407 303 416 293 Q425 283 426 280 Q428 277 436 269 Q444 261 448 259 Q451 257 458 247 L464 237","M394 394 Q403 391 417 380 Q431 370 434 366 L437 362","M397 252 Q409 257 420 266 L430 275","M412 358 Q443 287 446 277 Q450 267 450 262 L450 258","M448 360 Q449 362 486 366 Q523 371 536 374 Q548 376 566 381 Q583 386 592 390 Q600 394 610 400 Q621 407 642 428 Q662 449 666 450 Q671 450 672 448 Q673 446 674 426 Q675 407 678 389 Q682 371 696 320 Q711 268 716 254 Q722 239 728 216 L735 193","M558 266 Q558 270 560 272 Q563 274 572 274 Q580 273 584 271 Q587 269 598 260 Q608 250 626 228 Q644 205 648 202 L652 199","M670 157 Q652 198 652 200 Q653 202 652 218 Q650 233 652 235 Q653 237 660 238 Q668 238 677 234 Q686 231 695 224 Q704 218 716 206 Q728 193 730 192 Q733 191 734 192 L735 193","M733 191 Q749 163 754 159 Q758 155 766 140 Q775 125 776 119 Q777 113 775 112 Q773 110 773 108 L773 105","M749 156 Q763 124 768 117 L773 110","M794 280 Q808 271 820 269 Q832 267 846 262 L861 256"];
+const SIG2=["M219 346 Q219 396 216 398 Q213 399 196 415 Q178 431 154 455 Q130 479 110 502 Q91 524 74 546 Q56 568 44 586 Q32 603 22 620 Q13 638 12 643 Q10 648 10 657 Q11 666 18 676 Q25 686 34 696 Q44 705 56 714 Q68 723 82 730 Q95 738 100 740 Q106 741 122 742 Q139 742 150 740 Q162 739 170 736 Q177 734 185 729 Q193 724 199 718 Q205 712 210 705 Q214 698 218 690 Q221 682 224 665 Q227 648 226 611 L226 574","M218 582 Q221 577 224 576 Q226 574 227 568 Q228 561 232 558 Q236 554 288 474 Q341 395 348 386 Q356 377 358 376 Q361 376 362 378 Q363 379 363 392 Q363 405 362 413 Q361 421 359 428 Q357 435 350 452 Q343 468 331 492 Q319 517 296 556 Q274 596 266 608 Q257 620 251 626 Q245 632 242 636 L240 641","M218 397 Q226 501 226 530 Q227 558 228 559 L229 560","M219 390 Q224 389 280 334 Q336 279 356 258 Q376 237 383 232 Q390 226 393 225 L396 224","M371 595 Q373 590 376 588 Q379 586 381 582 Q383 579 394 552 Q406 524 410 503 Q415 482 415 478 Q415 474 413 472 Q411 471 406 472 Q401 472 396 475 Q390 478 387 478 Q384 479 384 480 Q383 481 382 499 Q382 517 377 552 Q372 587 373 588 L374 589","M384 479 Q386 464 385 463 Q384 462 384 447 Q384 432 386 424 L389 415","M386 464 Q392 459 402 440 Q411 420 420 398 Q430 376 444 342 Q457 307 460 306 Q463 304 464 322 Q464 341 458 384 Q453 427 452 462 Q451 497 449 528 Q447 560 450 560 Q453 560 458 554 Q462 547 469 531 Q476 515 487 462 Q498 408 510 369 Q521 330 526 316 Q532 301 536 296 Q540 291 542 290 Q545 290 546 291 Q547 292 546 308 Q545 323 530 372 Q514 420 508 440 Q503 460 500 480 Q496 500 496 512 Q496 525 497 526 Q498 527 504 526 Q510 526 516 520 Q522 515 530 504 Q537 492 540 486 Q542 481 546 476 Q551 471 554 456 Q557 441 560 438 Q563 436 566 428 Q570 419 594 346 Q618 274 632 237 Q647 200 668 152 Q688 105 692 91 Q696 77 696 72 Q695 67 692 68 Q690 68 688 71 Q685 74 672 98 Q658 122 644 152 Q629 182 614 220 Q599 257 592 280 Q584 302 575 336 Q566 370 561 399 Q556 428 556 433 Q556 438 557 439 L558 440","M549 536 Q551 477 550 476 L549 475","M549 536 Q550 610 551 617 Q552 624 554 626 L557 629","M563 684 Q562 683 560 685 Q559 687 560 701 Q560 715 562 720 Q563 726 566 728 Q568 729 569 728 Q570 727 570 716 Q569 705 568 696 Q566 687 564 686 Q562 684 560 661 Q557 638 559 608 Q561 578 566 552 Q572 525 582 486 Q592 446 600 407 Q608 368 618 326 Q629 283 631 282 Q633 280 634 273 L635 266","M628 289 Q635 287 635 284 Q635 282 634 281 L633 280","M632 329 L634 288","M632 329 Q632 442 634 449 Q636 456 640 460 Q644 463 648 463 Q652 463 654 460 Q656 457 668 409 Q680 361 684 350 Q687 338 690 336 Q693 334 694 331 Q695 328 696 316 Q698 304 703 289 Q708 274 718 256 Q728 237 732 231 Q736 225 739 224 Q742 223 742 228 Q743 233 734 297 Q726 361 724 389 Q723 417 720 432 Q718 446 716 450 Q715 453 712 456 Q709 458 707 458 Q705 458 702 456 Q698 453 696 445 Q693 437 693 396 Q693 354 694 353 Q695 352 694 343 L693 334","M694 353 Q706 360 716 360 L726 361","M727 359 Q729 360 734 358 Q739 357 748 349 Q756 341 772 318 Q788 296 796 282 Q805 267 808 266 L810 264","M800 468 Q801 418 800 416 Q798 415 798 392 Q799 369 802 337 Q805 305 808 286 Q812 267 811 265 Q810 263 817 243 Q824 223 824 218 Q823 214 828 197 Q832 180 840 158 Q847 137 864 103 Q881 69 886 60 Q892 52 894 50 Q896 48 898 48 Q901 47 902 44 L904 40","M801 418 Q805 414 808 394 Q810 375 818 342 Q825 310 829 299 Q833 288 835 286 Q837 284 838 284 Q840 284 842 288 Q843 292 843 354 Q843 417 842 433 Q840 449 837 466 Q834 483 835 488 Q836 492 834 500 Q832 507 831 518 L830 530","M824 220 Q831 216 859 152 Q887 88 894 72 Q900 55 900 51 L901 47","M836 491 Q842 486 868 427 Q895 368 916 315 Q937 262 956 209 Q975 156 987 128 Q999 99 1009 79 Q1019 59 1024 52 Q1028 46 1035 42 Q1042 38 1054 26 L1065 15"];
+(() => {
+  const $ = s => document.querySelector(s);
+  const stage = $('#stage'), env = $('#envelope'), seal = $('#seal'), flap = $('#flap'), letter = $('#letter'),
+        reader = $('#reader'), sheetsEl = $('#sheets'), nav = $('#nav'),
+        prevB = $('#prev'), nextB = $('#next'), countEl = $('#count');
+  const whole = seal.querySelector('.seal-whole'), shardsEl = seal.querySelector('.shards');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const sleep = ms => new Promise(r => setTimeout(r, reduce ? Math.min(ms, 40) : ms));
+  const rnd = (a, b) => a + Math.random() * (b - a);
+  let busy = false, blobD = '', signed = false, idx = 0, sheets = [];
+
+  /* ================= wax seal ================= */
+  function blobPath() {
+    const n = 30, pts = [], s1 = rnd(0, 6), s2 = rnd(0, 6);
+    for (let i = 0; i < n; i++) {
+      const a = i / n * Math.PI * 2;
+      const r = 86 * (1 + .05 * Math.sin(a * 3 + s1) + .035 * Math.sin(a * 7 + s2) + rnd(-.025, .025));
+      pts.push([100 + Math.cos(a) * r, 100 + Math.sin(a) * r]);
+    }
+    let d = 'M' + ((pts[n - 1][0] + pts[0][0]) / 2).toFixed(1) + ',' + ((pts[n - 1][1] + pts[0][1]) / 2).toFixed(1);
+    for (let i = 0; i < n; i++) {
+      const p = pts[i], q = pts[(i + 1) % n];
+      d += ` Q${p[0].toFixed(1)},${p[1].toFixed(1)} ${((p[0] + q[0]) / 2).toFixed(1)},${((p[1] + q[1]) / 2).toFixed(1)}`;
+    }
+    return d + 'Z';
+  }
+  function star(cx, cy, R, r, k) {
+    let d = '';
+    for (let i = 0; i < k * 2; i++) {
+      const a = -Math.PI / 2 + i * Math.PI / k, rr = i % 2 ? r : R;
+      d += (i ? 'L' : 'M') + (cx + Math.cos(a) * rr).toFixed(1) + ',' + (cy + Math.sin(a) * rr).toFixed(1);
+    }
+    return d + 'Z';
+  }
+  const starD = star(100, 100, 28, 9, 8), starD2 = star(100, 100, 14, 6, 4);
+  function sealSVG(id, crackMarkup = '') {
+    return `<svg viewBox="0 0 200 200" aria-hidden="true"><defs>
+      <radialGradient id="w${id}" cx="36%" cy="30%" r="78%"><stop offset="0" style="stop-color:var(--wax-hi)"/><stop offset=".26" style="stop-color:var(--wax-1)"/><stop offset=".72" style="stop-color:var(--wax-2)"/><stop offset="1" style="stop-color:var(--wax-3)"/></radialGradient>
+      <radialGradient id="d${id}" cx="62%" cy="68%" r="75%"><stop offset="0" style="stop-color:var(--wax-1)"/><stop offset="1" style="stop-color:var(--wax-2)"/></radialGradient>
+      <path id="t${id}" d="M100,100 m-70,0 a70,70 0 1,1 140,0 a70,70 0 1,1 -140,0"/></defs>
+      <path d="${blobD}" fill="url(#w${id})"/>
+      <circle cx="100" cy="100" r="60" fill="url(#d${id})" stroke="rgba(0,0,0,.4)" stroke-width="3"/>
+      <circle cx="99" cy="98.6" r="60" fill="none" style="stroke:var(--wax-hi)" stroke-width="1.2" opacity=".35"/>
+      <text font-family="Cormorant Garamond, Georgia, serif" font-size="12.5" font-weight="700" letter-spacing="4.4" fill="rgba(20,0,5,.55)"><textPath href="#t${id}">ДОГОВОР · О · ДРУЖБЕ · ДОГОВОР · О · ДРУЖБЕ ·</textPath></text>
+      <circle cx="100" cy="100" r="48" fill="none" stroke="rgba(20,0,5,.35)" stroke-width="1" stroke-dasharray="1 5" stroke-linecap="round"/>
+      <path d="${starD}" transform="translate(-1,-1.4)" style="fill:var(--wax-hi)" opacity=".38"/>
+      <path d="${starD}" fill="rgba(20,0,5,.42)"/>
+      <path d="${starD2}" style="fill:var(--wax-1)"/>
+      <ellipse cx="66" cy="58" rx="30" ry="12" transform="rotate(-35 66 58)" fill="#fff" opacity=".10"/>
+      <g class="crk">${crackMarkup}</g>
+    </svg>`;
+  }
+  function renderSeal() {
+    blobD = blobPath();
+    whole.innerHTML = sealSVG('w');
+    shardsEl.innerHTML = '';
+    seal.classList.remove('broken', 'touched');
+  }
+
+  /* zig-zag rays shared by the crack lines and the shard outlines */
+  function makeBreak() {
+    const c = [rnd(46, 54), rnd(45, 53)];
+    const n = Math.random() < .5 ? 5 : 6, off = rnd(0, Math.PI * 2);
+    const angles = Array.from({length: n}, (_, i) => off + i / n * Math.PI * 2 + rnd(-.22, .22));
+    const rays = angles.map(a => {
+      const pts = [], dx = Math.cos(a), dy = Math.sin(a);
+      for (let s = 1; s <= 5; s++) {
+        const d = s / 5 * 50, j = s < 5 ? rnd(-4.5, 4.5) : 0;
+        pts.push([c[0] + dx * d - dy * j, c[1] + dy * d + dx * j]);
+      }
+      pts.push([c[0] + dx * 95, c[1] + dy * 95]);
+      return pts;
+    });
+    const polys = angles.map((a, i) => {
+      const b = angles[(i + 1) % n] + (i === n - 1 ? Math.PI * 2 : 0), arc = [];
+      for (let k = 1; k < 4; k++) { const t = a + (b - a) * k / 4; arc.push([c[0] + Math.cos(t) * 95, c[1] + Math.sin(t) * 95]); }
+      return {pts: [c, ...rays[i], ...arc, ...rays[(i + 1) % n].slice().reverse()], mid: (a + b) / 2};
+    });
+    const toD = pts => pts.map((p, i) => (i ? 'L' : 'M') + (p[0] * 2).toFixed(1) + ',' + (p[1] * 2).toFixed(1)).join(' ');
+    const lines = rays.map(r => toD([c, ...r.slice(0, 5)]));
+    /* hairline branches off the main cracks */
+    rays.forEach(r => {
+      if (Math.random() < .55) {
+        const p = r[Math.floor(rnd(1, 3))], a = Math.atan2(p[1] - c[1], p[0] - c[0]) + rnd(.6, 1.1) * (Math.random() < .5 ? -1 : 1), L = rnd(8, 15);
+        lines.push(toD([p, [p[0] + Math.cos(a) * L * .5 + rnd(-1.5, 1.5), p[1] + Math.sin(a) * L * .5 + rnd(-1.5, 1.5)], [p[0] + Math.cos(a) * L, p[1] + Math.sin(a) * L]]));
+      }
+    });
+    const markup = lines.map(d => `<path class="cd" d="${d}" pathLength="1"/><path class="cl" d="${d}" pathLength="1"/>`).join('');
+    return {polys, markup, mainCount: rays.length};
+  }
+
+  /* simple 3D rigid-body fall for each piece of wax */
+  function fall(el, dirAngle, size, delay, opts = {}) {
+    const st = {x: 0, y: 0, rz: 0, rx: 0, ry: 0,
+      vx: Math.cos(dirAngle) * size * rnd(.5, 1.3) + rnd(-20, 20),
+      vy: -size * rnd(opts.lift || 1.5, (opts.lift || 1.5) + .8) + Math.sin(dirAngle) * size * .35,
+      vrz: rnd(-280, 280), vrx: rnd(-360, 360), vry: rnd(-260, 260)};
+    const g = size * 9.5, life = 1.9;
+    let t0 = null, last = null;
+    el.style.transition = 'none';
+    const base = el.style.transform || '';
+    function frame(now) {
+      if (t0 === null) { t0 = now + delay; last = t0; }
+      if (now < t0) return requestAnimationFrame(frame);
+      const dt = Math.min(.034, (now - last) / 1000), t = (now - t0) / 1000; last = now;
+      st.vy += g * dt; st.vx *= .992;
+      st.x += st.vx * dt; st.y += st.vy * dt;
+      st.rz += st.vrz * dt; st.rx += st.vrx * dt; st.ry += st.vry * dt;
+      el.style.transform = `${base} translate3d(${st.x}px,${st.y}px,0) rotateX(${st.rx}deg) rotateY(${st.ry}deg) rotateZ(${st.rz}deg)`;
+      el.style.opacity = t > life - .55 ? Math.max(0, (life - t) / .55) : 1;
+      if (t < life && el.isConnected) requestAnimationFrame(frame); else el.style.visibility = 'hidden';
+    }
+    if (reduce) { el.style.visibility = 'hidden'; return; }
+    requestAnimationFrame(frame);
+  }
+
+  /* flat flip of the flap, like a real envelope seen head-on: it shortens to a line at the hinge, then unfolds upward */
+  async function swingFlap(open) {
+    const a = open ? ['scaleY(1)', 'scaleY(0)'] : ['scaleY(-1)', 'scaleY(0)'];
+    const shadeA = open ? ['brightness(1)', 'brightness(.55)'] : ['brightness(1)', 'brightness(.6)'];
+    await flap.animate([{transform: a[0], filter: shadeA[0]}, {transform: a[1], filter: shadeA[1]}],
+      {duration: reduce ? 1 : 360, easing: 'cubic-bezier(.55,0,.9,.45)', fill: 'forwards'}).finished;
+    flap.classList.toggle('flipped', open);
+    const b = open ? ['scaleY(0)', 'scaleY(-1)'] : ['scaleY(0)', 'scaleY(1)'];
+    const anim = flap.animate([{transform: b[0], filter: 'brightness(.6)'}, {transform: b[1], filter: 'brightness(1)'}],
+      {duration: reduce ? 1 : 520, easing: 'cubic-bezier(.15,.6,.3,1)', fill: 'forwards'});
+    flap.getAnimations().filter(x => x !== anim).forEach(x => x.cancel());
+    await anim.finished;
+  }
+
+  async function breakSeal() {
+    if (busy || seal.classList.contains('touched')) return;
+    busy = true;
+    seal.classList.add('touched');
+    stage.classList.add('touched');
+
+    /* 1. the wax resists under the thumb */
+    seal.classList.add('strain');
+    const brk = makeBreak();
+    whole.querySelector('.crk').innerHTML = brk.markup;
+    const paths = [...whole.querySelectorAll('.crk path')];
+    await sleep(240);
+
+    /* 2. cracks run outward from the pressure point, then hairlines branch */
+    paths.forEach((p, i) => {
+      const k = Math.floor(i / 2), main = k < brk.mainCount;
+      const delay = main ? k * 85 : 380 + (k - brk.mainCount) * 60;
+      p.animate([{strokeDashoffset: 1}, {strokeDashoffset: 0}],
+        {duration: reduce ? 1 : (main ? 520 : 260), delay: reduce ? 0 : delay, easing: 'cubic-bezier(.2,.75,.3,1)', fill: 'forwards'});
+    });
+    await sleep(820);
+    seal.classList.remove('strain');
+
+    /* 3. the wax splits into pieces that settle apart a hair */
+    const size = seal.offsetWidth;
+    const crackDone = brk.markup.replace(/pathLength="1"/g, '');
+    const pieces = brk.polys.map((p, i) => {
+      const el = document.createElement('div');
+      el.className = 'shard';
+      el.style.clipPath = `polygon(${p.pts.map(([x, y]) => x.toFixed(1) + '% ' + y.toFixed(1) + '%').join(',')})`;
+      el.innerHTML = sealSVG('p' + i, crackDone);
+      shardsEl.append(el);
+      return {el, mid: p.mid, below: Math.sin(p.mid) > .3};
+    });
+    if (!pieces.some(p => p.below)) pieces.reduce((a, b) => Math.sin(b.mid) > Math.sin(a.mid) ? b : a).below = true;
+    if (pieces.filter(p => !p.below).length < 2) pieces.forEach(p => { if (Math.sin(p.mid) < .55) p.below = false; });
+    seal.classList.add('broken');
+    requestAnimationFrame(() => pieces.forEach(p => {
+      const d = rnd(1.5, 3.2);
+      p.el.style.transform = `translate(${(Math.cos(p.mid) * d).toFixed(2)}px,${(Math.sin(p.mid) * d).toFixed(2)}px) rotate(${rnd(-2, 2).toFixed(2)}deg)`;
+    }));
+    await sleep(320);
+
+    /* 4. the flap lifts and tears the upper pieces away; the lower ones stay stuck to the paper */
+    env.classList.add('opened');
+    const flapDone = swingFlap(true);
+    pieces.filter(p => !p.below).forEach((p, i) => fall(p.el, p.mid, size, 60 + i * 60));
+    for (let k = 0; k < 16; k++) {
+      const cr = document.createElement('span'), s = rnd(2.5, 7);
+      cr.className = 'crumb';
+      Object.assign(cr.style, {width: s + 'px', height: (s * rnd(.6, 1)) + 'px', margin: (-s / 2) + 'px', left: rnd(25, 75) + '%', top: rnd(20, 60) + '%'});
+      shardsEl.append(cr);
+      fall(cr, rnd(-Math.PI, 0), size * .8, 80 + rnd(0, 260), {lift: .8});
+    }
+    await flapDone;
+    env.classList.add('settle');
+    setTimeout(() => env.classList.remove('settle'), 650);
+
+    /* 5. the contract slides out */
+    env.classList.add('letter-peek');
+    await sleep(1400);
+    env.classList.add('letter-out');
+    await sleep(1300);
+    await openReader();
+    busy = false;
+  }
+
+  /* ================= contract sheets ================= */
+  function sizeSheets() {
+    const vw = innerWidth, vh = innerHeight;
+    const w = Math.min(600, vw - 32);
+    const h = Math.max(380, Math.min(w * 1.414, vh - 40 - 60 - 18));
+    sheetsEl.style.setProperty('--sw', w + 'px');
+    sheetsEl.style.setProperty('--sh', h + 'px');
+  }
+  function newSheet() {
+    const s = document.createElement('section');
+    s.className = 'sheet';
+    s.innerHTML = '<div class="sheet-head"><span>Договор о дружбе</span><span class="pg"></span></div><div class="sheet-body"></div>';
+    sheetsEl.append(s);
+    return s.querySelector('.sheet-body');
+  }
+  function paginate() {
+    sheetsEl.innerHTML = '';
+    const blocks = [...$('#doc').content.children].map(n => n.cloneNode(true));
+    let body = newSheet();
+    for (const b of blocks) {
+      body.append(b);
+      if (body.scrollHeight > body.clientHeight + 1 && body.children.length > 1) {
+        b.remove();
+        const carry = [b];
+        const prev = body.lastElementChild;
+        if (prev && prev.tagName === 'H2' && body.children.length > 1) { prev.remove(); carry.unshift(prev); }
+        body = newSheet();
+        carry.forEach(c => body.append(c));
+      }
+    }
+    sheets = [...sheetsEl.children];
+    sheets.forEach((s, i) => s.querySelector('.pg').textContent = `Лист ${i + 1} из ${sheets.length}`);
+    const btn = sheetsEl.querySelector('[data-sign]');
+    btn.addEventListener('click', sign);
+    if (signed) { drawSignature(1, false); drawSignature(2, false); writeDate(1, false); writeDate(2, false); btn.disabled = true; btn.textContent = 'Подписано'; }
+    idx = Math.min(idx, sheets.length - 1);
+    layout();
+  }
+  function layout() {
+    sheets.forEach((s, i) => {
+      s.classList.toggle('gone', i < idx);
+      s.classList.toggle('below', i > idx);
+      s.classList.toggle('hide', i > idx + 2);
+      s.style.zIndex = i < idx ? 100 + i : 50 - i;
+      s.setAttribute('aria-hidden', i !== idx);
+      s.inert = i !== idx;
+      if (i < idx) s.style.transform = `translate(-112%,-3%) rotate(-8deg)`;
+      else if (i === idx) s.style.transform = 'none';
+      else { const k = i - idx; s.style.transform = `translate(${k * 5}px,${k * 6}px) rotate(${(k % 2 ? .8 : -.5) * k}deg)`; }
+    });
+    prevB.disabled = idx === 0;
+    nextB.disabled = idx === sheets.length - 1;
+    countEl.textContent = `${idx + 1} / ${sheets.length}`;
+  }
+  function go(d) {
+    const n = Math.max(0, Math.min(sheets.length - 1, idx + d));
+    if (n !== idx) { idx = n; layout(); }
+  }
+  prevB.addEventListener('click', () => go(-1));
+  nextB.addEventListener('click', () => go(1));
+  addEventListener('keydown', e => {
+    if (reader.hidden) return;
+    if (e.key === 'ArrowRight') go(1);
+    if (e.key === 'ArrowLeft') go(-1);
+  });
+  let sx = null, sy = null;
+  sheetsEl.addEventListener('pointerdown', e => { sx = e.clientX; sy = e.clientY; });
+  sheetsEl.addEventListener('pointerup', e => {
+    if (sx === null) return;
+    const dx = e.clientX - sx, dy = e.clientY - sy; sx = null;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.4) go(dx < 0 ? 1 : -1);
+  });
+
+  async function openReader() {
+    const first = letter.getBoundingClientRect();
+    idx = 0;
+    reader.hidden = false;
+    sizeSheets();
+    paginate();
+    nav.classList.add('dim');
+    sheets.forEach(s => s.classList.add('hide'));
+    sheets[0].classList.remove('hide');
+    const cur = sheets[0];
+    sheetsEl.classList.add('veil');
+    const last = sheetsEl.getBoundingClientRect();
+    letter.style.visibility = 'hidden';
+    stage.classList.add('reading');
+    const s = first.width / last.width, cut = Math.max(0, (1 - first.height / (last.height * s)) * 100);
+    await sheetsEl.animate([
+      {transform: `translate(${first.left - last.left}px,${first.top - last.top}px) scale(${s}) rotate(-1.2deg)`, clipPath: `inset(0 0 ${cut}% 0)`},
+      {transform: 'none', clipPath: 'inset(0 0 0% 0)'}
+    ], {duration: reduce ? 1 : 1150, easing: 'cubic-bezier(.25,.8,.25,1)'}).finished.catch(() => {});
+    sheetsEl.classList.remove('veil');
+    layout();
+    nav.classList.remove('dim');
+  }
+
+  async function foldBack() {
+    if (busy) return;
+    busy = true;
+    nav.classList.add('dim');
+    idx = 0; layout();
+    sheets.forEach((s, i) => { if (i) s.classList.add('hide'); });
+    const cur = sheets[0];
+    cur.querySelector('.sheet-body').style.opacity = 0;
+    cur.querySelector('.sheet-head').style.opacity = 0;
+    await sleep(400);
+    sheetsEl.classList.add('veil');
+    stage.classList.remove('reading');
+    await sleep(1050);
+    const target = letter.getBoundingClientRect(), now = sheetsEl.getBoundingClientRect();
+    const s = target.width / now.width, cut = Math.max(0, (1 - target.height / (now.height * s)) * 100);
+    await sheetsEl.animate([
+      {transform: 'none', clipPath: 'inset(0 0 0% 0)'},
+      {transform: `translate(${target.left - now.left}px,${target.top - now.top}px) scale(${s}) rotate(-1.2deg)`, clipPath: `inset(0 0 ${cut}% 0)`}
+    ], {duration: reduce ? 1 : 900, easing: 'cubic-bezier(.5,0,.3,1)', fill: 'forwards'}).finished.catch(() => {});
+    letter.style.visibility = '';
+    reader.hidden = true;
+    sheetsEl.getAnimations().forEach(a => a.cancel());
+    env.classList.remove('letter-out', 'letter-peek');
+    await sleep(1000);
+    env.classList.remove('opened');
+    await swingFlap(false);
+    await sleep(250);
+    renderSeal();
+    seal.classList.add('stamp');
+    await sleep(820);
+    seal.classList.remove('stamp');
+    stage.classList.remove('touched');
+    busy = false;
+  }
+  $('#fold').addEventListener('click', foldBack);
+
+  /* ================= signing ================= */
+  const MONTHS = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+  function writeDate(n, animate) {
+    const slot = sheetsEl.querySelector(`[data-slot="date${n}"]`);
+    const d = new Date();
+    slot.innerHTML = `<span class="hand">«${d.getDate()}» ${MONTHS[d.getMonth()]} ${d.getFullYear()} г.</span>`;
+    const h = slot.firstChild;
+    if (!animate) { h.style.clipPath = 'none'; return; }
+    h.getBoundingClientRect();
+    h.classList.add('on');
+  }
+  const SIGS = {
+    1: {paths: SIG1, box: '0 0 872 650', label: 'Подпись Д. А. Попова'},
+    2: {paths: SIG2, box: '0 0 1080 750', label: 'Подпись М. Ю. Быстровой'}
+  };
+  function drawSignature(n, animate) {
+    const slot = sheetsEl.querySelector(`[data-slot="sig${n}"]`), sg = SIGS[n];
+    slot.innerHTML = `<svg class="sig-svg s${n}" viewBox="${sg.box}" role="img" aria-label="${sg.label}">${sg.paths.map(d => `<path d="${d}"/>`).join('')}</svg>`;
+    if (!animate) return 0;
+    const ps = [...slot.querySelectorAll('path')];
+    const lens = ps.map(p => p.getTotalLength());
+    const total = lens.reduce((a, b) => a + b, 0), dur = 2600, gap = 55;
+    let t = 0;
+    ps.forEach((p, i) => {
+      const L = lens[i], d = Math.max(70, dur * L / total);
+      p.style.strokeDasharray = L;
+      p.style.strokeDashoffset = L;
+      p.animate([{strokeDashoffset: L}, {strokeDashoffset: 0}], {duration: d, delay: t, easing: 'cubic-bezier(.45,.1,.4,1)', fill: 'forwards'});
+      t += d + gap;
+    });
+    return t;
+  }
+  async function bringIntoView(n) {
+    const slot = sheetsEl.querySelector(`[data-slot="sig${n}"]`), body = slot.closest('.sheet-body');
+    if (body.scrollHeight > body.clientHeight) { slot.scrollIntoView({block: 'center', behavior: reduce ? 'auto' : 'smooth'}); await sleep(550); }
+  }
+  async function sign(e) {
+    const btn = e.currentTarget;
+    if (signed) return;
+    signed = true;
+    btn.disabled = true;
+    btn.textContent = 'Подписываю…';
+    for (const n of [1, 2]) {
+      await bringIntoView(n);
+      const t = drawSignature(n, !reduce);
+      await sleep(t + 150);
+      writeDate(n, !reduce);
+      await sleep(1150);
+    }
+    btn.textContent = 'Подписано';
+    await sleep(500);
+    await hug();
+  }
+
+  /* ================= the two signatures embrace ================= */
+  const HUG = ["M196 92 C 190 58 160 44 136 58 C 114 72 112 112 128 138 C 142 160 170 166 188 150 C 200 138 202 116 196 92", "M136 58 C 150 70 168 72 190 74", "M204 100 C 206 70 230 56 254 66 C 276 76 282 108 270 134 C 258 158 230 164 212 150 C 202 140 200 120 204 100", "M254 66 C 262 84 272 92 278 100", "M156 162 C 154 176 146 188 128 198 C 100 212 90 236 88 270 C 86 320 92 370 96 420", "M240 160 C 244 176 254 186 272 196 C 300 212 310 238 312 272 C 314 322 308 372 304 420", "M200 168 C 196 220 204 300 200 420", "M110 214 C 140 236 190 226 236 206 C 256 198 272 192 286 196", "M286 196 C 296 200 298 210 290 214 M 292 208 C 302 214 302 224 292 226 M 290 222 C 298 230 294 238 284 236", "M300 300 C 270 318 220 322 170 312 C 146 306 128 300 112 296", "M112 296 C 100 292 96 282 104 278 M 106 286 C 94 284 92 274 102 270 M 104 276 C 96 268 102 260 112 264"];
+  async function hug() {
+    if (reduce) return;
+    const ov = document.createElement('div');
+    ov.className = 'hug';
+    ov.setAttribute('role', 'dialog');
+    ov.setAttribute('aria-label', 'Договор заключён');
+    document.body.append(ov);
+    ov.animate([{opacity: 0}, {opacity: 1}], {duration: 700, fill: 'both'});
+
+    const vw = innerWidth, vh = innerHeight, cx = vw / 2, cy = vh * .46;
+    const w = Math.min(230, vw * .42);
+    const make = n => {
+      const src = sheetsEl.querySelector(`[data-slot="sig${n}"] svg`);
+      const r = src.getBoundingClientRect();
+      const fly = document.createElement('div');
+      fly.className = 'fly';
+      fly.innerHTML = `<div class="lean">${src.outerHTML}</div>`;
+      fly.querySelector('svg').removeAttribute('class');
+      fly.querySelectorAll('path').forEach(p => p.removeAttribute('style'));
+      ov.append(fly);
+      const h = w * r.height / r.width;
+      const tx = n === 1 ? cx - w * .9 : cx - w * .1;
+      const ty = cy - h / 2;
+      Object.assign(fly.style, {left: tx + 'px', top: ty + 'px', width: w + 'px'});
+      const s0 = r.width / w;
+      const dx = r.left + r.width / 2 - (tx + w / 2), dy = r.top + r.height / 2 - (ty + h / 2);
+      return {fly, lean: fly.querySelector('.lean'), from: `translate(${dx}px,${dy}px) scale(${s0})`, h};
+    };
+    const A = make(1), B = make(2);
+
+    /* 1. both signatures lift off the paper and glide to the middle */
+    await Promise.all([A, B].map((o, i) => o.fly.animate([{transform: o.from, opacity: .6}, {transform: 'none', opacity: 1}],
+      {duration: 1300, delay: i * 120, easing: 'cubic-bezier(.3,.8,.2,1)', fill: 'both'}).finished));
+
+    /* 2. they lean in and hold each other, squeezing twice */
+    const lean = (el, dir) => el.animate([
+      {transform: 'none'},
+      {transform: `translateX(${dir * w * .07}px) rotate(${dir * 9}deg)`, offset: .35},
+      {transform: `translateX(${dir * w * .1}px) rotate(${dir * 11}deg) scale(.95,1.02)`, offset: .5},
+      {transform: `translateX(${dir * w * .07}px) rotate(${dir * 9}deg)`, offset: .62},
+      {transform: `translateX(${dir * w * .1}px) rotate(${dir * 11}deg) scale(.95,1.02)`, offset: .78},
+      {transform: `translateX(${dir * w * .08}px) rotate(${dir * 9.5}deg)`}
+    ], {duration: 2400, easing: 'cubic-bezier(.45,0,.3,1)', fill: 'forwards'});
+    lean(A.lean, 1); lean(B.lean, -1);
+    await sleep(800);
+
+    /* 3. the two signatures settle below, and a line drawing of an embrace appears */
+    const hh = Math.min(vh * .44, 380), hw = hh * 400 / 440;
+    const dTop = Math.max(24, cy - hh * .62);
+    const ring = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    ring.setAttribute('class', 'heart-ring');
+    ring.setAttribute('viewBox', '0 0 400 440');
+    Object.assign(ring.style, {left: (cx - hw / 2) + 'px', top: dTop + 'px', width: hw + 'px', height: hh + 'px'});
+    ring.innerHTML = HUG.map(d => `<path d="${d}"/>`).join('');
+    ov.insertBefore(ring, ov.firstChild);
+    const sigY = dTop + hh + 26;
+    [A, B].forEach(o => {
+      const r = o.fly.getBoundingClientRect();
+      o.fly.animate([{transform: 'none'}, {transform: `translateY(${sigY - r.top - r.height * .3}px) scale(.62)`}],
+        {duration: 1100, easing: 'cubic-bezier(.4,0,.2,1)', fill: 'forwards'});
+    });
+    await sleep(500);
+    const hp = [...ring.querySelectorAll('path')];
+    const hl = hp.map(p => p.getTotalLength()), htot = hl.reduce((a, b) => a + b, 0);
+    let ht = 0;
+    hp.forEach((p, k) => {
+      const d = Math.max(90, 2600 * hl[k] / htot);
+      p.style.strokeDasharray = hl[k];
+      p.animate([{strokeDashoffset: hl[k]}, {strokeDashoffset: 0}], {duration: d, delay: ht, easing: 'cubic-bezier(.45,.1,.4,1)', fill: 'both'});
+      ht += d + 40;
+    });
+    await sleep(ht + 100);
+    ring.animate([{transform: 'scale(1)'}, {transform: 'scale(1.03)', offset: .3}, {transform: 'scale(1)'}], {duration: 1400, easing: 'ease-in-out'});
+
+    /* 4. little hearts drift up, and the words appear */
+    for (let i = 0; i < 18; i++) {
+      const sp = document.createElement('span'), sz = rnd(8, 20);
+      sp.className = 'spark'; sp.innerHTML = HEART;
+      sp.style.setProperty('--s', sz + 'px');
+      if (Math.random() < .45) sp.style.color = 'var(--gold)';
+      sp.style.left = (cx + rnd(-hw * .55, hw * .55)) + 'px';
+      sp.style.top = (dTop + rnd(hh * .1, hh * .7)) + 'px';
+      ov.append(sp);
+      sp.animate([{opacity: 0, transform: 'translateY(0) scale(.4)'}, {opacity: 1, transform: `translateY(-${rnd(30, 60)}px) scale(1)`, offset: .3},
+        {opacity: 0, transform: `translate(${rnd(-30, 30)}px,-${rnd(140, 260)}px) scale(.7)`}],
+        {duration: rnd(2200, 3400), delay: rnd(0, 900), easing: 'ease-out', fill: 'both'});
+    }
+    const cap = document.createElement('div');
+    cap.className = 'caption';
+    cap.style.top = (sigY + w * .62 * .6 + 10) + 'px';
+    cap.innerHTML = '<b>Договор заключён</b><span>нажми, чтобы вернуться</span>';
+    ov.append(cap);
+    cap.animate([{opacity: 0, transform: 'translateY(8px)'}, {opacity: 1, transform: 'none'}], {duration: 900, delay: 300, easing: 'ease-out', fill: 'forwards'});
+
+    await new Promise(res => {
+      const close = () => { ov.removeEventListener('click', close); removeEventListener('keydown', key); res(); };
+      const key = e => { if (e.key === 'Escape' || e.key === 'Enter') close(); };
+      setTimeout(() => { ov.addEventListener('click', close); addEventListener('keydown', key); }, 900);
+    });
+    await ov.animate([{opacity: 1}, {opacity: 0}], {duration: 700, fill: 'forwards'}).finished;
+    ov.remove();
+  }
+
+  /* ================= ambience ================= */
+  seal.addEventListener('click', breakSeal);
+
+  /* ================= code word ================= */
+  const KEY = '04929e4a9e1956cdbff26d0eda67b95cea3d5db7616fb54fac7534cf0ffdee82';
+  const gate = $('#gate'), gateCard = $('#gateCard'), gateMsg = $('#gateMsg'), gateInput = $('#gate-word');
+  const WRONG = ['Не угадала. Попробуй ещё.', 'Холодно. Даня любит другое.', 'Мимо. Ты точно знаешь ответ.'];
+  let tries = 0;
+  const HEART = '<svg viewBox="0 0 24 22" aria-hidden="true"><path fill="currentColor" d="M12 21.6 10.3 20C4.2 14.5 0 10.7 0 6.1 0 2.6 2.7 0 6.2 0c2 0 3.9.9 5.1 2.4h1.4C13.9.9 15.8 0 17.8 0 21.3 0 24 2.6 24 6.1c0 4.6-4.2 8.4-10.3 13.9L12 21.6z"/></svg>';
+  function hearts() {
+    if (reduce) return;
+    const big = document.createElement('span');
+    big.className = 'big-heart'; big.innerHTML = HEART; gateCard.append(big);
+    big.animate([{transform: 'scale(.2)', opacity: 0}, {transform: 'scale(1.15)', opacity: 1, offset: .3}, {transform: 'scale(.95)', opacity: 1, offset: .45},
+      {transform: 'scale(1.08)', opacity: 1, offset: .6}, {transform: 'scale(1.6)', opacity: 0}], {duration: 1500, easing: 'ease-out'}).finished.then(() => big.remove());
+    for (let i = 0; i < 22; i++) {
+      const h = document.createElement('span'), s = rnd(10, 26);
+      h.className = 'heart'; h.innerHTML = HEART;
+      h.style.setProperty('--s', s + 'px'); h.style.margin = (-s / 2) + 'px';
+      if (Math.random() < .4) h.style.color = 'var(--gold)';
+      gateCard.append(h);
+      const a = rnd(0, Math.PI * 2), d = rnd(90, 220);
+      h.animate([
+        {transform: 'translate(0,0) scale(.3) rotate(0)', opacity: 0},
+        {transform: `translate(${Math.cos(a) * d * .5}px,${Math.sin(a) * d * .5}px) scale(1) rotate(${rnd(-20, 20)}deg)`, opacity: 1, offset: .3},
+        {transform: `translate(${Math.cos(a) * d}px,${Math.sin(a) * d - rnd(60, 140)}px) scale(.8) rotate(${rnd(-40, 40)}deg)`, opacity: 0}
+      ], {duration: rnd(1300, 2100), delay: rnd(0, 250), easing: 'cubic-bezier(.2,.7,.3,1)', fill: 'backwards'}).finished.then(() => h.remove());
+    }
+  }
+  /* ================= wishes in chat bubbles ================= */
+  const WISHES = ['Мы знакомы совсем недолго', 'но мне хватило времени понять', 'что ты очень хороший человек', 'и я правда рад, что мы познакомились'];
+  const wishBox = $('#wishes');
+  function bubbleEl(cls, html) {
+    const b = document.createElement('div');
+    b.className = 'bubble' + (cls ? ' ' + cls : '');
+    b.innerHTML = html;
+    wishBox.append(b);
+    return b;
+  }
+  const pop = el => el.animate([{opacity: 0, transform: 'translateY(14px) scale(.92)'}, {opacity: 1, transform: 'none'}],
+    {duration: reduce ? 1 : 420, easing: 'cubic-bezier(.2,.9,.3,1.15)', fill: 'both'}).finished;
+  const away = (el, up) => el.animate([{opacity: 1, transform: 'none'}, {opacity: 0, transform: up ? 'translateY(-26px) scale(.96)' : 'scale(.9)'}],
+    {duration: reduce ? 1 : (up ? 650 : 220), easing: 'cubic-bezier(.4,0,.6,1)', fill: 'forwards'}).finished.then(() => el.remove());
+  async function playWishes() {
+    for (const text of WISHES) {
+      const t = bubbleEl('typing', '<i></i><i></i><i></i>');
+      await pop(t);
+      await sleep(650);
+      await away(t, false);
+      const b = bubbleEl('', text);
+      await pop(b);
+      await sleep(Math.max(2500, 1000 + text.length * 70));
+      await away(b, true);
+      await sleep(150);
+    }
+  }
+  async function digest(str) {
+    const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+    return [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2, '0')).join('');
+  }
+  $('#gateForm').addEventListener('submit', async e => {
+    e.preventDefault();
+    const word = gateInput.value.trim().toLowerCase().replace(/ё/g, 'е').replace(/[«»"'.!]/g, '');
+    let ok = false;
+    try { ok = (await digest(word)) === KEY; } catch { ok = false; }
+    if (!ok && ['меня', 'милану', 'милана', 'миланку', 'миланочку', 'тебя'].includes(word)) {
+      gateMsg.textContent = 'Вне сомнений, но ответ не верный';
+      gateMsg.classList.add('love');
+      hearts();
+      gateInput.select();
+      return;
+    }
+    gateMsg.classList.remove('love');
+    if (ok) {
+      gateMsg.textContent = '';
+      gate.classList.add('gone');
+      stage.classList.remove('locked');
+      gateInput.blur();
+      setTimeout(() => {
+        gate.hidden = true;
+        stage.classList.remove('intro');
+        $('.env-wrap').animate([{opacity: 0, transform: 'translateY(24px) scale(.8)'}, {opacity: 1, transform: 'none'}],
+          {duration: reduce ? 1 : 1100, easing: 'cubic-bezier(.2,.9,.3,1.12)'});
+        $('.hint').animate([{opacity: 0}, {opacity: 0, offset: .6}, {opacity: 1}], {duration: reduce ? 1 : 1600});
+        seal.focus({preventScroll: true});
+      }, 650);
+    } else {
+      gateMsg.textContent = WRONG[tries++ % WRONG.length];
+      gateCard.classList.remove('shake'); void gateCard.offsetWidth; gateCard.classList.add('shake');
+      gateInput.select();
+    }
+  });
+  addEventListener('resize', () => {
+    if (!reader.hidden && !busy) { sizeSheets(); paginate(); }
+    sizeDust();
+  });
+  stage.addEventListener('pointermove', e => {
+    const r = env.getBoundingClientRect();
+    env.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100).toFixed(1) + '%');
+    env.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100).toFixed(1) + '%');
+  });
+
+  const cv = $('#dust'), ctx = cv.getContext('2d');
+  let W = 0, H = 0, motes = [];
+  function sizeDust() {
+    const dpr = Math.min(devicePixelRatio || 1, 2);
+    W = stage.clientWidth; H = stage.clientHeight;
+    cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    motes = Array.from({length: Math.round(Math.min(70, W * H / 14000))}, () => ({
+      x: rnd(0, W), y: rnd(0, H), r: rnd(.5, 2.1), vx: rnd(-.12, .12), vy: rnd(-.28, -.05), p: rnd(0, 6.28), s: rnd(.004, .015)
+    }));
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.globalCompositeOperation = 'lighter';
+    for (const m of motes) {
+      if (!reduce) { m.x += m.vx; m.y += m.vy; m.p += m.s; if (m.y < -10) { m.y = H + 10; m.x = rnd(0, W); } }
+      const a = .25 + .45 * (Math.sin(m.p) * .5 + .5);
+      const g = ctx.createRadialGradient(m.x, m.y, 0, m.x, m.y, m.r * 5);
+      g.addColorStop(0, `rgba(255,205,140,${a})`); g.addColorStop(1, 'rgba(255,160,80,0)');
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(m.x, m.y, m.r * 5, 0, 6.283); ctx.fill();
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  sizeDust(); draw();
+  renderSeal();
+
+  /* wishes first, then the question */
+  (async () => {
+    await sleep(900);
+    await playWishes();
+    stage.classList.add('locked');
+    stage.classList.remove('wishes');
+    gate.hidden = false;
+    gate.getBoundingClientRect();
+    gate.classList.remove('gone');
+    setTimeout(() => gateInput.focus({preventScroll: true}), 700);
+  })();
+})();
+</script>
+</body>
+</html>
